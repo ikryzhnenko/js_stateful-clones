@@ -33,10 +33,13 @@ function transformStateWithClones(state, actions) {
           return newState;
         }, {});
         break;
+
+      default:
+        throw new Error(`Unknown action type: ${action.type}`);
     }
 
-    // Push the new state to the statesArray
-    statesArray.push(currentState);
+    // Push a shallow copy of the current state to the statesArray
+    statesArray.push({ ...currentState });
   }
 
   return statesArray;
